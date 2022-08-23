@@ -12,15 +12,14 @@ app.get('/', function (req, res) {
 app.post('/api/fileanalyse', upload.array('file', 10), function (req, res) {    
 
     if (req.body.password === 'password') {
-    const info = {
-        name: req.file.filename,
-        size: req.file.size,
-        type: req.file.type,
-        location: req.file.path
-    }
+        const file = req.files[req.files.length];
+        
 
 
-            res.json(info)
+            res.json({
+                'location': '/files',
+                "res": 'all files uploaded successfully'
+            })
 } else {
     res.status(404).send('error pass not matched')
 }
