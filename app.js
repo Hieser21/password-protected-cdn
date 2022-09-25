@@ -3,7 +3,7 @@ const app = express();
 const fs = require('fs');
 const multer = require('multer');
 
-const port = 8000;
+const port = 3000;
 const responsedelay = 50;   // miliseconds
 
 // static folders
@@ -33,9 +33,9 @@ var uploadStorage = multer.diskStorage(
 
 var upload = multer({ storage: uploadStorage });
 
-app.post('/', upload.single('file'), function(req, res)
+app.post('/', upload.array('file'), function(req, res)
 {
-    console.log(req.file);
+    console.log(req.files);
     console.log('file upload...');
 });
 

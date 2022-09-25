@@ -1,5 +1,9 @@
 function uploadToServer(form, uploadProgressDisplayerId)
 {
+    let password = prompt("Please enter your password");
+   
+    if (password == "password")
+    {
     let formData = new FormData(form);
 
     let xhr = new XMLHttpRequest();
@@ -27,4 +31,6 @@ function uploadToServer(form, uploadProgressDisplayerId)
     });
 
     xhr.send(formData);
-}
+}else {
+    alert('Password incorrect! File was not uploaded \n TIP: Contact the owner for the pass');
+} }
