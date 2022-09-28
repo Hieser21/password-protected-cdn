@@ -1,4 +1,4 @@
-Node.jS based file manager
+Node.js based file manager
 
 It's as "plug and play" as it could get!
 After forking or cloning run ```npm install ``` and after that run 

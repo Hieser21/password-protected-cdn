@@ -1,6 +1,7 @@
 body {
     margin: 0;
     font-family: Arial;
+    color-scheme: dark;
 }
 
 .bg-dark {
@@ -46,6 +47,7 @@ body {
     padding: 6px 12px;
     border: 1px solid #ccc;
     border-top: none;
+    color: white;
 }
 
 div#viewoptions {
@@ -84,7 +86,7 @@ table.fileproperties th {
     text-align: left;
     border-left: 1px solid #ddd;
     background-color: #ccc;
-    color: black;
+    color: rgb(255, 255, 255);
 }
 
 table.fileproperties td a {
