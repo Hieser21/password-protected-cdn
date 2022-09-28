@@ -2,19 +2,29 @@ const express = require('express');
 const app = express();
 const fs = require('fs');
 const multer = require('multer');
-
 const port = 3000;
+const helmet = require('helmet');
 const responsedelay = 50;   // miliseconds
-
 // static folders
-app.use(express.static('public'));
+var options = {
+    setHeaders: function (res, path, stat) {
+      res.set({
+        'cache-control': 'public, max-age=86400',
+        'vary': 'accept-encoding',
+
+    });
+    }
+  }
+app.use(helmet.hidePoweredBy());  
 app.use(express.static('userfiles'));
-app.use(express.static('view'));
+app.use(express.static('view', options));
 
 // home page
 app.get('/', function(req, res)
 {
-    res.sendFile('index.html');
+    express.response.setHeader('cache-control', 'public, max-age=86400');
+    res.sendFile('index.html')
+   
 });
 
 // upload handler
@@ -28,16 +38,39 @@ var uploadStorage = multer.diskStorage(
     {
         //let fileName = checkFileExistense(req.query.folder ,file.originalname);
         cb(null, file.originalname);
-    }
+    },
+    
 });
 
-var upload = multer({ storage: uploadStorage });
+var upload = multer({ storage: uploadStorage,
+    fileFilter: function (req, file, cb) {
+        if (req.body.password == 'password') {
+            cb(null, true);
+} else {
+    return cb(new Error("Invalid password"));
+}
+}
+});
 
-app.post('/', upload.array('file'), function(req, res)
+app.post('/', upload.array('file'), function(req, res, err)
 {
+    if (req.body.password === 'password') {
+        res.status(200);
+    }
+    else {
+        console.log(req.body.password + '\n' + 'Did not match');
+        res.status(500).json({Message: "Password incorrect"});
+        
+    }
+    if (err) {
+        console.log(err);
+    }
     console.log(req.files);
     console.log('file upload...');
 });
+
+
+
 
 // all type of files except images will explored here
 app.post('/files-list', function(req, res)
