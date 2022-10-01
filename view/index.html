@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>File Manager</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
+
 <body class="bg-dark" style="color-scheme: dark; color:azure;">
     <!-- loading scripts and styles -->
     <link rel="stylesheet" media="screen" href="./scripts/css/style.css" />
@@ -13,22 +17,32 @@
     <script src="./scripts/js/uploader.js"></script>
 
     <div class="tab">
-        <button class="tablinks" onclick="openTab(event, 'fileuploader'); getListOfFiles('file', 'fileholder', 'loadinggif'); document.getElementById('viewoptions').style.display = 'none';">file</button>
-        <button class="tablinks" onclick="openTab(event, 'fontuploader'); getListOfFiles('font', 'fileholder', 'loadinggif'); document.getElementById('viewoptions').style.display = 'none';">font</button>
-        <button class="tablinks" onclick="openTab(event, 'htmluploader'); getListOfFiles('html', 'fileholder', 'loadinggif'); document.getElementById('viewoptions').style.display = 'none';">html</button>
-        <button class="tablinks" onclick="openTab(event, 'imageuploader'); getListOfFiles('image', 'fileholder', 'loadinggif'); document.getElementById('viewoptions').style.display = 'block';">image</button>
-        <button class="tablinks" onclick="openTab(event, 'pdfuploader'); getListOfFiles('pdf', 'fileholder', 'loadinggif'); document.getElementById('viewoptions').style.display = 'none';">pdf</button>
-        <button class="tablinks" onclick="openTab(event, 'videouploader'); getListOfFiles('video', 'fileholder', 'loadinggif'); document.getElementById('viewoptions').style.display = 'none';">video</button>
+        <button class="tablinks"
+            onclick="openTab(event, 'fileuploader'); getListOfFiles('file', 'fileholder', 'loadinggif'); document.getElementById('viewoptions').style.display = 'none';">file</button>
+        <button class="tablinks"
+            onclick="openTab(event, 'fontuploader'); getListOfFiles('font', 'fileholder', 'loadinggif'); document.getElementById('viewoptions').style.display = 'none';">font</button>
+        <button class="tablinks"
+            onclick="openTab(event, 'htmluploader'); getListOfFiles('html', 'fileholder', 'loadinggif'); document.getElementById('viewoptions').style.display = 'none';">html</button>
+        <button class="tablinks"
+            onclick="openTab(event, 'imageuploader'); getListOfFiles('image', 'fileholder', 'loadinggif'); document.getElementById('viewoptions').style.display = 'block';">image</button>
+        <button class="tablinks"
+            onclick="openTab(event, 'pdfuploader'); getListOfFiles('pdf', 'fileholder', 'loadinggif'); document.getElementById('viewoptions').style.display = 'none';">pdf</button>
+        <button class="tablinks"
+            onclick="openTab(event, 'videouploader'); getListOfFiles('video', 'fileholder', 'loadinggif'); document.getElementById('viewoptions').style.display = 'none';">video</button>
+            <button data-target="#lock" data-toggle="modal" class="tablinks"
+            onclick="openTab(event, 'secureuploader'); getListOfFiles('secure', 'fileholder', 'loadinggif'); document.getElementById('viewoptions').style.display = 'none';">secure</button>
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Delete</button>
 
         <div id="viewoptions">
             <form>
                 View options:
-                <input type="radio" name="viewoption" value="details" onclick="replaceClassName('tile', 'details')" checked>Details
+                <input type="radio" name="viewoption" value="details" onclick="replaceClassName('tile', 'details')"
+                    checked>Details
                 <input type="radio" name="viewoption" value="tile" onclick="replaceClassName('details', 'tile')">Tile
             </form>
         </div>
     </div>
-    
+
     <div id="progressBar"></div>
 
     <div id="fileuploader" class="tabcontent">
@@ -36,7 +50,9 @@
         <form id="form_fileUpload" method="POST" action="/?type=file" enctype="multipart/form-data">
             <input type="text" name="password" placeholder="Enter your password" required>
             <input type="file" multiple name="file" required>
-            <input type="button" onclick="uploadToServer(document.getElementById('form_fileUpload'), document.getElementById('progressBar'))" value="Upload">
+            <input type="button"
+                onclick="uploadToServer(document.getElementById('form_fileUpload'), document.getElementById('progressBar'))"
+                value="Upload">
         </form>
     </div>
 
@@ -45,7 +61,9 @@
         <form id="form_fontUpload" method="POST" action="/?type=font" enctype="multipart/form-data">
             <input type="text" name="password" placeholder="Enter your password" required>
             <input type="file" multiple name="file" accept=".ttf, .otf" required>
-            <input type="button" onclick="uploadToServer(document.getElementById('form_fontUpload'), document.getElementById('progressBar'))" value="Upload">
+            <input type="button"
+                onclick="uploadToServer(document.getElementById('form_fontUpload'), document.getElementById('progressBar'))"
+                value="Upload">
         </form>
     </div>
 
@@ -54,7 +72,9 @@
         <form id="form_htmlUpload" method="POST" action="/?type=html" enctype="multipart/form-data">
             <input type="text" name="password" placeholder="Enter your password" required>
             <input type="file" multiple name="file" accept="text/html, text/htm" required>
-            <input type="button" onclick="uploadToServer(document.getElementById('form_htmlUpload'), document.getElementById('progressBar'))" value="Upload">
+            <input type="button"
+                onclick="uploadToServer(document.getElementById('form_htmlUpload'), document.getElementById('progressBar'))"
+                value="Upload">
         </form>
     </div>
 
@@ -62,8 +82,10 @@
         <p><b>image</b></p>
         <form id="form_imageUpload" method="POST" action="/?type=image" enctype="multipart/form-data">
             <input type="text" name="password" placeholder="Enter your password" required>
-            <input type="file"  multiple name="file" accept="image/*" required>
-            <input type="button" onclick="uploadToServer(document.getElementById('form_imageUpload'), document.getElementById('progressBar'))" value="Upload">
+            <input type="file" multiple name="file" accept="image/*" required>
+            <input type="button"
+                onclick="uploadToServer(document.getElementById('form_imageUpload'), document.getElementById('progressBar'))"
+                value="Upload">
         </form>
     </div>
 
@@ -72,7 +94,9 @@
         <form id="form_pdfUpload" method="POST" action="/?type=pdf" enctype="multipart/form-data">
             <input type="text" name="password" placeholder="Enter your password" required>
             <input type="file" multiple name="file" accept="application/pdf" required>
-            <input type="button" onclick="uploadToServer(document.getElementById('form_pdfUpload'), document.getElementById('progressBar'))" value="Upload">
+            <input type="button"
+                onclick="uploadToServer(document.getElementById('form_pdfUpload'), document.getElementById('progressBar'))"
+                value="Upload">
         </form>
     </div>
 
@@ -81,12 +105,114 @@
         <form id="form_videoUpload" method="POST" action="/?type=video" enctype="multipart/form-data">
             <input type="text" name="password" placeholder="Enter your password" required>
             <input type="file" name="file" accept="video/*" required>
-            <input type="button" onclick="uploadToServer(document.getElementById('form_videoUpload'), document.getElementById('progressBar'))" value="Upload">
+            <input type="button"
+                onclick="uploadToServer(document.getElementById('form_videoUpload'), document.getElementById('progressBar'))"
+                value="Upload">
+        </form>
+    </div>
+    <div id="secureuploader" class="tabcontent">
+        <p><b>Secured</b></p>
+        <form id="form_secureUpload" method="POST" action="/?type=secure" enctype="multipart/form-data">
+            <input type="text" name="password" placeholder="Enter your password" required>
+            <input type="file" name="file" multiple required>
+            <input type="button"
+                onclick="uploadToServer(document.getElementById('form_secureUpload'), document.getElementById('progressBar'))"
+                value="Upload">
         </form>
     </div>
 
     <div><img id="loadinggif" src="./scripts/img/200.gif" alt="Loading Files..."></div>
 
     <div class="fileholder" id="fileholder"></div>
+
+    <div class="modal fade bg-dark" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content bg-dark">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete Files</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="/file/delete" id="delete-form">
+                        <div class="form-group">
+                            <label for="password" class="col-form-label">Password:</label>
+                            <input type="text" class="form-control" name="password" id="password">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Filenames</label>
+                            <input type="text" class="form-control" name="delete" id="message-text">
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-danger" value="Send Request!"></input>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bg-dark" id="lock" tabindex="-1" role="dialog" aria-labelledby="lockModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content bg-dark">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Unlock with pass</h5>
+            </div>
+            <div class="modal-body">
+                <form id="key" method="post">
+                    <input type="password" name="password" required>
+            </div>
+            <div class="modal-footer">
+              <input type="submit" class="btn btn-primary" value="Unlock">
+            </form>
+            </div>
+          </div>
+        </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.1.js"
+        integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script>
+        $('#key').on('submit', function(event) {
+            event.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: '/lock',
+                data: $('#key').serialize(),
+                success: function(data) {
+                if (data = "OK") {
+                    $('#lock').modal('hide');
+                }
+                },
+                error: function(data) {
+                    window.location.reload();
+                    
+            }
+        })
+        });
+        $('#delete-form').on('submit', function (event) {
+            const $form = $('#delete-form');
+
+            event.preventDefault();
+            $.ajax({
+                url: '/file/delete',
+                type: 'POST',
+                data: $form.serialize()
+            }).done(response => {
+                console.log(response)
+            })
+            $('#exampleModal').modal('hide');
+        })
+    </script>
+
 </body>
+
 </html>

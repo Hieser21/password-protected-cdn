@@ -50,7 +50,6 @@ function getListOfFiles(filestype, fileholderid, loadinggifid)
     {
         xhr.open("POST", "/" + requestedfileslist + "?folder=" + filestype, true);
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhr.setRequestHeader('Cache-Control', 'max-age=86400');
         xhr.send();
     }
 }
