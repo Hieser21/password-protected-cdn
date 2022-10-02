@@ -5,7 +5,6 @@ const multer = require("multer");
 const bodyParser = require("body-parser");
 const port = 3000;
 const helmet = require("helmet");
-const axios = require('axios');
 const responsedelay = 50; // miliseconds
 // static folders
 
@@ -164,7 +163,8 @@ app.post("/image-list", function (req, res) {
             // this condition searches for "jpeg" and "png" images (you must add other magic numbers yourself)
             else if (
               data.toString("hex").search("ffd8") == 0 ||
-              data.toString("hex").search("89504e47") == 0
+              data.toString("hex").search("89504e47") == 0 ||
+              data.toString("hex").search("47494638") == 0
             ) {
               // findig jpeg and png images by watching files as binary data and checking the 2 or 4 magic bytes/numbers.
               fs.stat(

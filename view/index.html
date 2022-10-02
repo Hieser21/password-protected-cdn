@@ -29,7 +29,7 @@
             onclick="openTab(event, 'pdfuploader'); getListOfFiles('pdf', 'fileholder', 'loadinggif'); document.getElementById('viewoptions').style.display = 'none';">pdf</button>
         <button class="tablinks"
             onclick="openTab(event, 'videouploader'); getListOfFiles('video', 'fileholder', 'loadinggif'); document.getElementById('viewoptions').style.display = 'none';">video</button>
-            <button data-target="#lock" data-toggle="modal" class="tablinks"
+            <button id="btn" data-target="#lock" data-toggle="modal" class="tablinks"
             onclick="openTab(event, 'secureuploader'); getListOfFiles('secure', 'fileholder', 'loadinggif'); document.getElementById('viewoptions').style.display = 'none';">secure</button>
         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Delete</button>
 
@@ -181,6 +181,12 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
     <script>
+        $('#btn').on('click', function(e){
+            $('#lock').modal({ 
+            backdrop:'static',
+            keyboard: false,
+        })
+        })
         $('#key').on('submit', function(event) {
             event.preventDefault();
             $.ajax({
@@ -196,7 +202,8 @@
                     window.location.reload();
                     
             }
-        })
+        }) 
+        $('#key').trigger('reset');
         });
         $('#delete-form').on('submit', function (event) {
             const $form = $('#delete-form');
@@ -210,7 +217,7 @@
                 console.log(response)
             })
             $('#exampleModal').modal('hide');
-        })
+       $('#delete-form').trigger('reset')  })
     </script>
 
 </body>
