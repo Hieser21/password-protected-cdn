@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require("express");
 const app = express();
 const fs = require("fs");
@@ -41,7 +42,7 @@ var uploadStorage = multer.diskStorage({
 var upload = multer({
   storage: uploadStorage,
   fileFilter: function (req, file, cb) {
-    if (req.body.password == "password") {
+    if (req.body.password == process.env.PASSWORD) {
       cb(null, true);
     } else {
       return cb(new Error("Invalid password"));
@@ -64,7 +65,7 @@ app.post("/", upload.array("file"), function (req, res, err) {
 });
 
 app.post("/file/delete", function (req, res) 
-{ if (req.body.password == 'password') {
+{ if (req.body.password == process.env.PASSWORD) {
   const filenames = req.body.delete.split(", ");
   filenames.forEach(function (filename) {
     fs.unlink('userfiles' + filename, function (err) {
@@ -77,7 +78,7 @@ app.post("/file/delete", function (req, res)
 
 app.post('/lock', function (req, res) {
   console.log(req.body)
-    if (req.body.password == "password") {
+    if (req.body.password == process.env.PASSWORD) {
          res.status(200).send('OK')  
     } else {
         res.status(403).send("NO")
