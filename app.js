@@ -51,7 +51,7 @@ var upload = multer({
 });
 
 app.post("/", upload.array("file"), function (req, res, err) {
-  if (req.body.password === "password") {
+  if (req.body.password === process.env.PASSWORD) {
     res.status(200);
   } else {
     console.log(req.body.password + "\n" + "Did not match");
